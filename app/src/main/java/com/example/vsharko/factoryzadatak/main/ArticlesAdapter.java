@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.R;
+import com.example.vsharko.factoryzadatak.model.FakeModel;
 import com.example.vsharko.factoryzadatak.pojo.Article;
 
 import java.util.List;
@@ -20,7 +21,8 @@ import butterknife.ButterKnife;
 
 public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
 
-    private List<Article> mArticles;
+    FakeModel model;
+    List<Article> mArticles;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -33,8 +35,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         }
     }
 
-    public ArticlesAdapter(List<Article> mArticles) {
-        this.mArticles = mArticles;
+    public ArticlesAdapter(List<Article> articles) {
+        this.mArticles = articles;
     }
 
     @NonNull
@@ -48,13 +50,13 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Article article = mArticles.get(position);
-        Glide.with(App.getInstance().getApplicationContext()).load(mArticles.get(position).getUrlToImage())
+        Glide.with(App.getInstance().getApplicationContext()).load(article.getUrlToImage())
                 .into(viewHolder.mImage);
-        viewHolder.mTitle.setText(mArticles.get(position).getTitle());
+        viewHolder.mTitle.setText(article.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mArticles.size();
+        return 0;
     }
 }

@@ -1,24 +1,26 @@
 package com.example.vsharko.factoryzadatak.main.presenter;
+
+import android.util.Log;
+
 import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
 import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
-import com.example.vsharko.factoryzadatak.model.fakeModel;
+import com.example.vsharko.factoryzadatak.model.FakeModel;
 import com.example.vsharko.factoryzadatak.pojo.Article;
 import com.example.vsharko.factoryzadatak.pojo.ArticlesList;
-
 import java.util.List;
 
-public class MainPresenterImpl implements MainPresenter {
+public class MainPresenterImpl implements MainPresenter,ResponseListener{
 
     private MainActivityView view;
-    private fakeModel model;
+    private FakeModel model;
     NetworkingHelper networkingHelper;
 
     public MainPresenterImpl(MainActivityView view) {
        setView(view);
-       model = fakeModel.getInstance();
-       networkingHelper = App.getInstance().getNetworkingHelper();
+       this.model = FakeModel.getInstance();
+       this.networkingHelper = App.getInstance().getNetworkingHelper();
     }
 
     @Override
@@ -28,30 +30,28 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public List<Article> getArticles() {
+        getArticlesFromAPI();
         return model.getArticles();
     }
 
-    @Override
-    public void updateModelWithArticles() {
-        model.setListOfArticles(getArticlesFromAPI().getArticles());
+
+    private void updateModelWithArticles(ArticlesList list) {
+        model.setListOfArticles(list.getArticles());
     }
 
-    public ArticlesList getArticlesFromAPI(){
-        final ArticlesList[] articles = {new ArticlesList()};
+    private void getArticlesFromAPI() {
+        networkingHelper.getNewsFromAPI(this);
+    }
 
-        networkingHelper.getNewsFromAPI(new ResponseListener<ArticlesList>() {
+    @Override
+    public void onSuccess(Object callback) {
+        updateModelWithArticles((ArticlesList) callback);
+        view.setAdapter(model.getArticles());
+        Log.i("daaa",model.getArticles().get(1).getDescription());
+    }
 
-            @Override
-            public void onSuccess(ArticlesList callback) {
-                articles[0] = (ArticlesList) callback.getArticles();
-            }
+    @Override
+    public void onFailure(Throwable throwable) {
 
-            @Override
-            public void onFailure(Throwable throwable) {
-
-            }
-        });
-
-        return articles[0];
     }
 }

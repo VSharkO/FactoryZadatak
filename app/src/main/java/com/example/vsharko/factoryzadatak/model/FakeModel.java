@@ -1,21 +1,21 @@
 package com.example.vsharko.factoryzadatak.model;
-
 import com.example.vsharko.factoryzadatak.pojo.Article;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class fakeModel {
-    private List listOfArticles = new ArrayList();
+public class FakeModel {
 
-    private static fakeModel model;
+    private List<Article> listOfArticles;
 
-    private fakeModel() {
+    private static FakeModel model;
+
+    private FakeModel() {
     }
 
-    public static fakeModel getInstance() {
+    public static FakeModel getInstance() {
         if (model == null) {
-            model = new fakeModel();
+            model = new FakeModel();
             return model;
 
         } else {
@@ -23,15 +23,11 @@ public class fakeModel {
         }
     }
 
-    public void add(Article article) {
-       listOfArticles.add(article);
-    }
-
     public List<Article> getArticles() {
         return listOfArticles;
     }
 
-    public void setListOfArticles(List listOfArticles) {
+    public void setListOfArticles(List<Article> listOfArticles) {
         this.listOfArticles = listOfArticles;
     }
 }
