@@ -1,10 +1,12 @@
 package com.example.vsharko.factoryzadatak.main.view;
 
 import com.example.vsharko.factoryzadatak.pojo.Article;
+import com.example.vsharko.factoryzadatak.pojo.ArticlesList;
 
 import java.util.List;
 
 public interface MainActivityView {
-    void initPresenter(MainActivityView view);
-    void setAdapter(List<Article> articles);
+
+    void setAdapterData(ArticlesList articles);
+
 }

@@ -2,6 +2,7 @@ package com.example.vsharko.factoryzadatak.main;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +22,17 @@ import butterknife.ButterKnife;
 
 public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
 
-    FakeModel model;
-    List<Article> mArticles;
+    private List<Article> mArticles;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-
         @BindView(R.id.titleview_article) TextView mTitle;
         @BindView(R.id.imageview_article) ImageView mImage;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this,view);
+
         }
     }
 
@@ -41,22 +42,23 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
 
     @NonNull
     @Override
-    public ArticlesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.article_layout,
                 parent,false);
-        return new ViewHolder(itemView);
+        ViewHolder viewHolder = new ViewHolder(itemView);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Article article = mArticles.get(position);
+        viewHolder.mTitle.setText(article.getTitle());
         Glide.with(App.getInstance().getApplicationContext()).load(article.getUrlToImage())
                 .into(viewHolder.mImage);
-        viewHolder.mTitle.setText(article.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mArticles.size();
     }
 }

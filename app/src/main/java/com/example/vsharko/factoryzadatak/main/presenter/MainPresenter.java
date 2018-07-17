@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MainPresenter {
     void setView(MainActivityView view);
-    List<Article> getArticles();
+    void getArticles();
 
 }

@@ -11,16 +11,20 @@ import com.example.vsharko.factoryzadatak.pojo.Article;
 import com.example.vsharko.factoryzadatak.pojo.ArticlesList;
 import java.util.List;
 
-public class MainPresenterImpl implements MainPresenter,ResponseListener{
+public class MainPresenterImpl implements MainPresenter{
 
     private MainActivityView view;
     private FakeModel model;
-    NetworkingHelper networkingHelper;
+    private NetworkingHelper networkingHelper;
 
     public MainPresenterImpl(MainActivityView view) {
        setView(view);
        this.model = FakeModel.getInstance();
-       this.networkingHelper = App.getInstance().getNetworkingHelper();
+    }
+
+    public MainPresenterImpl(MainActivityView view, NetworkingHelper networkingHelper) {
+        this.view = view;
+        this.networkingHelper = networkingHelper;
     }
 
     @Override
@@ -29,29 +33,24 @@ public class MainPresenterImpl implements MainPresenter,ResponseListener{
     }
 
     @Override
-    public List<Article> getArticles() {
+    public void getArticles() {
         getArticlesFromAPI();
-        return model.getArticles();
     }
 
-
-    private void updateModelWithArticles(ArticlesList list) {
-        model.setListOfArticles(list.getArticles());
-    }
 
     private void getArticlesFromAPI() {
-        networkingHelper.getNewsFromAPI(this);
+        networkingHelper.getNewsFromAPI(new ResponseListener<ArticlesList>() {
+            @Override
+            public void onSuccess(ArticlesList callback) {
+                view.setAdapterData(callback);
+                Log.i("ma nemoguce",callback.getArticles().get(1).getAuthor());
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+        });
     }
 
-    @Override
-    public void onSuccess(Object callback) {
-        updateModelWithArticles((ArticlesList) callback);
-        view.setAdapter(model.getArticles());
-        Log.i("daaa",model.getArticles().get(1).getDescription());
-    }
-
-    @Override
-    public void onFailure(Throwable throwable) {
-
-    }
 }
