@@ -31,4 +31,7 @@ public class fakeModel {
         return listOfArticles;
     }
 
+    public void setListOfArticles(List listOfArticles) {
+        this.listOfArticles = listOfArticles;
+    }
 }

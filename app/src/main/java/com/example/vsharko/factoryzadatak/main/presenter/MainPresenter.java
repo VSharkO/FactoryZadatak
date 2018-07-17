@@ -8,5 +8,6 @@ import java.util.List;
 public interface MainPresenter {
     void setView(MainActivityView view);
     public List<Article> getArticles();
+    public void updateModelWithArticles();
 
 }
