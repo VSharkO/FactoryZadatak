@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelperImpl;
 import com.example.vsharko.factoryzadatak.helpers.networking.NewsAPIService;
+import com.example.vsharko.factoryzadatak.model.FakeModel;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 import com.google.gson.Gson;
 
@@ -16,7 +17,7 @@ public class App extends Application {
     Retrofit retrofit;
     NetworkingHelper networkingHelper;
     private static App sInstance;
-    Gson gson;
+    FakeModel model;
 
     @Override
     public void onCreate(){
@@ -24,7 +25,8 @@ public class App extends Application {
         sInstance = this;
         retrofit = provideRestClient();
         NewsAPIService service = createNewsAPIService(retrofit);
-        networkingHelper = new NetworkingHelperImpl(service);
+        this.networkingHelper = new NetworkingHelperImpl(service);
+        model = FakeModel.getInstance();
 
     }
 
@@ -47,8 +49,7 @@ public class App extends Application {
     }
 
     public NetworkingHelper getNetworkingHelper(){
-        return networkingHelper;
+        return this.networkingHelper;
     }
-
 
 }
