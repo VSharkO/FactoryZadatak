@@ -27,10 +27,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView,SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements MainActivityView {
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
-    @BindView(R.id.progress_bar) ProgressBar progressBar;
     @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
     private List<Article> articleList = new ArrayList<>();
     private MyAdapter adapter;
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         initPresenter();
         initAlertDialog();
         initRecyclerView();
-        presenter.getArticlesFromAPI();
+        initSwipeRefresh();
+        presenter.getArticles();
     }
 
     private void initRecyclerView() {
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void initPresenter() {
@@ -69,42 +70,33 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        presenter.getArticlesFromAPI();
+
                     }
                 });
-        alertDialogBuilder.setNegativeButton("Exit the app",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
+    }
+
+    public void initSwipeRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        presenter.getArticles();
+                    }
+                }
+        );
     }
 
     @Override
     public void updateAdapterData(List<Article> articles) {
+        articleList.clear();
         articleList.addAll(articles);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showFailurePopup() {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }
-
-    @Override
-    public void onRefresh() {
-        presenter.getArticlesFromAPI();
     }
 
     @Override

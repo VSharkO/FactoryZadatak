@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface MainActivityView {
     void updateAdapterData(List<Article> articles);
-    void showProgressBar();
-    void hideProgressBar();
     void showFailurePopup();
     void setRefreshingEnd();
     void setRefreshingStart();
