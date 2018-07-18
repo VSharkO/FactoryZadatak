@@ -1,11 +1,17 @@
 package com.example.vsharko.factoryzadatak.main.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.main.MyAdapter;
@@ -21,32 +27,93 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView {
+public class MainActivity extends AppCompatActivity implements MainActivityView,SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
+    @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
     private List<Article> articleList = new ArrayList<>();
     private MyAdapter adapter;
     private MainPresenter presenter;
+    private AlertDialog.Builder alertDialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        this.presenter = new MainPresenterImpl(this, App.getInstance().getNetworkingHelper());
-        adapter = new MyAdapter(articleList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(adapter);
+        initPresenter();
+        initAlertDialog();
+        initRecyclerView();
         presenter.getArticlesFromAPI();
     }
 
+    private void initRecyclerView() {
+        adapter = new MyAdapter(articleList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void initPresenter() {
+        this.presenter = new MainPresenterImpl(this, App.getInstance().getNetworkingHelper());
+    }
+
+    private void initAlertDialog(){
+        alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Oh! Something went wrong, be sure to check internet connection");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        presenter.getArticlesFromAPI();
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("Exit the app",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+    }
 
     @Override
-    public void updateData(List<Article> articles) {
+    public void updateAdapterData(List<Article> articles) {
         articleList.addAll(articles);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showFailurePopup() {
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.getArticlesFromAPI();
+    }
+
+    @Override
+    public void setRefreshingEnd(){
+       swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void setRefreshingStart(){
+        swipeRefreshLayout.setRefreshing(true);
     }
 }

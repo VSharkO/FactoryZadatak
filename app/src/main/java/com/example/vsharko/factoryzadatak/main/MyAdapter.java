@@ -45,7 +45,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public int getItemCount() {
         Log.i("listNum",String.valueOf(articleList.size()));
         return articleList.size();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -58,6 +57,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
-
     }
 }

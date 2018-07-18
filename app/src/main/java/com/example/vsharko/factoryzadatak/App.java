@@ -34,7 +34,6 @@ public class App extends Application {
         return retrofit.create(NewsAPIService.class);
     }
 
-
     @NonNull
     private Retrofit provideRestClient() {
 

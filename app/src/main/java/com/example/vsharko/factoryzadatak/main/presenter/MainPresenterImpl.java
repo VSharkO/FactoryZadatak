@@ -18,26 +18,32 @@ public class MainPresenterImpl implements MainPresenter{
         this.view = view;
         this.networkingHelper = networkingHelper;
         this.model = FakeModel.getInstance();
-
     }
+
     @Override
     public void getArticlesFromAPI() {
+        //view.showProgressBar();
+        view.setRefreshingStart();
         networkingHelper.getNewsFromAPI(new ResponseListener<List<Article>>() {
 
             @Override
             public void onSuccess(List<Article> callback) {
                 model.setListOfArticles(callback);
-                getArticles();
+                view.setRefreshingEnd();
+                updateViewArticles();
+                //view.hideProgressBar();
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                //view.hideProgressBar();
+                //view.setRefreshingEnd();
+                view.showFailurePopup();
             }
         });
     }
 
-    private void getArticles() {
-        view.updateData(model.getArticles());
+    private void updateViewArticles() {
+        view.updateAdapterData(model.getArticles());
     }
 }

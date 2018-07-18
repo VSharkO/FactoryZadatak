@@ -7,18 +7,25 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imageview_article"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/picture_dimen_width"
+        android:layout_height="@dimen/picture_dimen_height"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:contentDescription="@string/newsimage"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/ic_launcher"
+
+        />
     <TextView
         android:id="@+id/titleview_article"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/picture_dimen_height"
+        android:layout_toRightOf="@id/imageview_article"
         android:layout_toEndOf="@id/imageview_article"
-        android:gravity="center"
-        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="@dimen/paddingText"
+        android:gravity="start"
+        android:textSize="@dimen/title_textSize"
         />
 </RelativeLayout>

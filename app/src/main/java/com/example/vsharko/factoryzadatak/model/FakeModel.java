@@ -16,7 +16,6 @@ public class FakeModel {
         if (model == null) {
             model = new FakeModel();
             return model;
-
         } else {
             return model;
         }
@@ -27,6 +26,7 @@ public class FakeModel {
     }
 
     public void setListOfArticles(List<Article> listOfArticles) {
+            this.listOfArticles.clear();
             this.listOfArticles.addAll(listOfArticles);
     }
 }
