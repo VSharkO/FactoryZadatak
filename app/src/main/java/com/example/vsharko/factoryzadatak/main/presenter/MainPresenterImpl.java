@@ -5,6 +5,8 @@ import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
 import com.example.vsharko.factoryzadatak.model.Article;
+
+import java.util.Calendar;
 import java.util.List;
 
 public class MainPresenterImpl implements MainPresenter{
@@ -28,6 +30,7 @@ public class MainPresenterImpl implements MainPresenter{
                 model.setListOfArticles(callback);
                 view.updateAdapterData(model.getArticles());
                 view.setRefreshingEnd();
+                //Log.i("Usao","Usao");
             }
 
             @Override
@@ -38,11 +41,22 @@ public class MainPresenterImpl implements MainPresenter{
         });
     }
 
-    @Override
-    public void getArticles() {
-        //getArticlesFromAPI();
+    private void getArticlesFromDB(){
         view.updateAdapterData(model.getArticles());
         view.setRefreshingEnd();
         model.getArticles();
     }
+
+    @Override
+    public void getArticles() {
+        //5min = 300000milisec
+        long MinValueInMilisec = 300000;
+
+        if(model.getArticles().get(1).getDate().getTime()+MinValueInMilisec < Calendar.getInstance().getTimeInMillis())
+            getArticlesFromAPI();
+        else{
+            getArticlesFromDB();
+        }
+    }
+
 }

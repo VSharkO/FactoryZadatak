@@ -4,6 +4,9 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.util.Calendar;
+import java.util.Date;
+
 @Entity(tableName = "articles_table")
 public class Article {
 
@@ -15,7 +18,11 @@ public class Article {
     private String url;
     private String urlToImage;
     private String publishedAt;
+    private Date date;
 
+    public Article(){
+        date = Calendar.getInstance().getTime();
+    }
     public String getAuthor(){
         return author;
     }
@@ -51,5 +58,11 @@ public class Article {
     }
     public void setPublishedAt(String input){
         this.publishedAt = input;
+    }
+    public Date getDate(){
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
