@@ -1,13 +1,11 @@
 package com.example.vsharko.factoryzadatak.main.presenter;
-import android.util.Log;
-
+import android.os.AsyncTask;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
 import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
 import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
 import com.example.vsharko.factoryzadatak.model.Article;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,9 +28,8 @@ public class MainPresenterImpl implements MainPresenter{
             @Override
             public void onSuccess(List<Article> callback) {
                 model.setListOfArticles(callback);
-                view.updateAdapterData(model.getArticles());
-                view.setRefreshingEnd();
-                Log.i("Usao","Usao");
+                new GetArticlesAsync().execute();
+                //Log.i("Op","Tu je");
             }
 
             @Override
@@ -43,10 +40,9 @@ public class MainPresenterImpl implements MainPresenter{
         });
     }
 
-    private void getArticlesFromDB(){
-        view.updateAdapterData(model.getArticles());
+    private void getArticlesFromDB(List<Article> articles){
+        view.updateAdapterData(articles);
         view.setRefreshingEnd();
-        model.getArticles();
     }
 
     @Override
@@ -54,11 +50,30 @@ public class MainPresenterImpl implements MainPresenter{
         //5min = 300000milisec
         long milliSeconds = 300000;
 
-        if(model.getArticles().size()==0 || model.getArticles().get(1).getDate().getTime()+milliSeconds < Calendar.getInstance().getTimeInMillis())
-           getArticlesFromAPI();
+        //first time that app is running
+        if(model.getArticles().size()==0){
+            getArticlesFromAPI();
+        }
+
+        else if(model.getArticles().get(1).getDate().getTime()
+                +milliSeconds < Calendar.getInstance().getTimeInMillis()){
+            getArticlesFromAPI();
+        }
+
         else{
-            getArticlesFromDB();
+            new GetArticlesAsync().execute();
         }
     }
 
+    private class GetArticlesAsync extends AsyncTask<Void, Void, List<Article>> {
+
+        @Override
+        protected List<Article> doInBackground(Void... voids) {
+            return model.getArticles();
+        }
+
+        protected void onPostExecute(List<Article> articles) {
+           getArticlesFromDB(articles);
+        }
+    }
 }
