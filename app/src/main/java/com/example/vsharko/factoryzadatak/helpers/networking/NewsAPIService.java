@@ -1,6 +1,6 @@
 package com.example.vsharko.factoryzadatak.helpers.networking;
 
-import com.example.vsharko.factoryzadatak.pojo.ArticlesList;
+import com.example.vsharko.factoryzadatak.model.ArticlesList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

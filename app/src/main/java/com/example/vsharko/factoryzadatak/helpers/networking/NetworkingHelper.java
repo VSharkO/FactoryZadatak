@@ -1,8 +1,7 @@
 package com.example.vsharko.factoryzadatak.helpers.networking;
 
 import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
-import com.example.vsharko.factoryzadatak.pojo.Article;
-import com.example.vsharko.factoryzadatak.pojo.ArticlesList;
+import com.example.vsharko.factoryzadatak.model.Article;
 
 import java.util.List;
 

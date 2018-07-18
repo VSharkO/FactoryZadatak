@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.R;
-import com.example.vsharko.factoryzadatak.pojo.Article;
+import com.example.vsharko.factoryzadatak.model.Article;
 
 import java.util.List;
 

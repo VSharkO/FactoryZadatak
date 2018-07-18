@@ -1,30 +1,33 @@
-package com.example.vsharko.factoryzadatak.model;
-import com.example.vsharko.factoryzadatak.pojo.Article;
+package com.example.vsharko.factoryzadatak.database.repository;
+import com.example.vsharko.factoryzadatak.model.Article;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakeModel {
+public class FakeDatabase implements ArticlesRepository {
 
-    private static FakeModel model;
+    private static FakeDatabase model;
 
-    private FakeModel() {
+    private FakeDatabase() {
     }
 
     private List<Article> listOfArticles = new ArrayList<>();
 
-    public static FakeModel getInstance() {
+    public static FakeDatabase getInstance() {
         if (model == null) {
-            model = new FakeModel();
+            model = new FakeDatabase();
             return model;
         } else {
             return model;
         }
     }
 
+    @Override
     public List<Article> getArticles() {
         return listOfArticles;
     }
 
+    @Override
     public void setListOfArticles(List<Article> listOfArticles) {
             this.listOfArticles.clear();
             this.listOfArticles.addAll(listOfArticles);

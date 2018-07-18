@@ -9,17 +9,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.main.MyAdapter;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.R;
-import com.example.vsharko.factoryzadatak.model.FakeModel;
-import com.example.vsharko.factoryzadatak.pojo.Article;
+import com.example.vsharko.factoryzadatak.model.Article;
 
 import java.util.ArrayList;
 import java.util.List;

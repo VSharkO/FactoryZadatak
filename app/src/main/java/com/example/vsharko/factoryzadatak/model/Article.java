@@ -1,7 +1,15 @@
-package com.example.vsharko.factoryzadatak.pojo;
+package com.example.vsharko.factoryzadatak.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "articles_table")
 public class Article {
+
     private String author;
+    @PrimaryKey
+    @NonNull
     private String title;
     private String description;
     private String url;

@@ -1,12 +1,11 @@
 package com.example.vsharko.factoryzadatak.helpers.networking;
 
 import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
-import com.example.vsharko.factoryzadatak.pojo.Article;
-import com.example.vsharko.factoryzadatak.pojo.ArticlesList;
+import com.example.vsharko.factoryzadatak.model.Article;
+import com.example.vsharko.factoryzadatak.model.ArticlesList;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,7 +25,7 @@ public class NetworkingHelperImpl implements NetworkingHelper {
         service.getNews(Constants.NEWS_API_LINK).enqueue(new Callback<ArticlesList>() {
             @Override
             public void onResponse(Call<ArticlesList> call, Response<ArticlesList> response) {
-                if (response != null && response.body()!=null){
+                if (response.body()!=null){
                     ArticlesList data = response.body();
                     if(data!=null)
                         listener.onSuccess(data.getArticles());

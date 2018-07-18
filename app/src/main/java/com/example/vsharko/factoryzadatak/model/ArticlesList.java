@@ -1,5 +1,4 @@
-package com.example.vsharko.factoryzadatak.pojo;
-
+package com.example.vsharko.factoryzadatak.model;
 
 import java.util.List;
 
