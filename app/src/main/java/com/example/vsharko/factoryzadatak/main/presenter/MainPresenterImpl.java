@@ -1,4 +1,6 @@
 package com.example.vsharko.factoryzadatak.main.presenter;
+import android.util.Log;
+
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
 import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
 import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
@@ -30,7 +32,7 @@ public class MainPresenterImpl implements MainPresenter{
                 model.setListOfArticles(callback);
                 view.updateAdapterData(model.getArticles());
                 view.setRefreshingEnd();
-                //Log.i("Usao","Usao");
+                Log.i("Usao","Usao");
             }
 
             @Override
@@ -50,10 +52,10 @@ public class MainPresenterImpl implements MainPresenter{
     @Override
     public void getArticles() {
         //5min = 300000milisec
-        long MinValueInMilisec = 300000;
+        long milliSeconds = 300000;
 
-        if(model.getArticles().get(1).getDate().getTime()+MinValueInMilisec < Calendar.getInstance().getTimeInMillis())
-            getArticlesFromAPI();
+        if(model.getArticles().size()==0 || model.getArticles().get(1).getDate().getTime()+milliSeconds < Calendar.getInstance().getTimeInMillis())
+           getArticlesFromAPI();
         else{
             getArticlesFromDB();
         }
