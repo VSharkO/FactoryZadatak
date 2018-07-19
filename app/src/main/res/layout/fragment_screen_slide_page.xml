@@ -49,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/article"
                 android:textSize="@dimen/single_article_readmore_text_size"
-                android:gravity="center_horizontal|bottom"
                 android:paddingLeft="@dimen/padding_single_article"
                 android:paddingRight="@dimen/padding_single_article"
                 android:text="@string/read_more_on"
@@ -64,7 +63,6 @@
                 android:paddingLeft="@dimen/padding_single_article"
                 android:paddingRight="@dimen/padding_single_article"
                 android:paddingBottom="@dimen/padding_single_article"
-                android:gravity="center_horizontal|bottom"
                 android:autoLink="web"
                 />
 
