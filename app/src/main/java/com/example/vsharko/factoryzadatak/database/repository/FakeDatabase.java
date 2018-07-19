@@ -1,3 +1,5 @@
+//just for testing, unused.
+
 package com.example.vsharko.factoryzadatak.database.repository;
 import com.example.vsharko.factoryzadatak.model.Article;
 
