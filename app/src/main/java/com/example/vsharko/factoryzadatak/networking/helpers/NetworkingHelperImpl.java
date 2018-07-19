@@ -1,6 +1,7 @@
-package com.example.vsharko.factoryzadatak.helpers.networking;
+package com.example.vsharko.factoryzadatak.networking.helpers;
 
-import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
+import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
+import com.example.vsharko.factoryzadatak.networking.ResponseListener;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.model.ArticlesList;
 import com.example.vsharko.factoryzadatak.utils.Constants;

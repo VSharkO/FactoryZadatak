@@ -3,10 +3,9 @@ package com.example.vsharko.factoryzadatak;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
-import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelperImpl;
-import com.example.vsharko.factoryzadatak.helpers.networking.NewsAPIService;
-import com.example.vsharko.factoryzadatak.database.repository.FakeDatabase;
+import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
+import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelperImpl;
+import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 
 import retrofit2.Retrofit;

@@ -1,8 +1,8 @@
 package com.example.vsharko.factoryzadatak.main.presenter;
 import android.os.AsyncTask;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
-import com.example.vsharko.factoryzadatak.helpers.ResponseListener;
-import com.example.vsharko.factoryzadatak.helpers.networking.NetworkingHelper;
+import com.example.vsharko.factoryzadatak.networking.ResponseListener;
+import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
 import com.example.vsharko.factoryzadatak.model.Article;
@@ -29,14 +29,13 @@ public class MainPresenterImpl implements MainPresenter{
             @Override
             public void onSuccess(List<Article> callback) {
                 model.setListOfArticles(callback);
-                new GetArticlesAsync().execute();
+                new GetArticlesAsyncFromDB().execute();
                 //Log.i("Op","Tu je");
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-                new GetArticlesAsync().execute();
-                view.setRefreshingEnd();
+                new GetArticlesAsyncFromDB().execute();
                 view.showFailurePopup();
             }
         });
@@ -63,11 +62,11 @@ public class MainPresenterImpl implements MainPresenter{
         }
 
         else{
-            new GetArticlesAsync().execute();
+            new GetArticlesAsyncFromDB().execute();
         }
     }
 
-    private class GetArticlesAsync extends AsyncTask<Void, Void, List<Article>> {
+    private class GetArticlesAsyncFromDB extends AsyncTask<Void, Void, List<Article>> {
 
         @Override
         protected List<Article> doInBackground(Void... voids) {

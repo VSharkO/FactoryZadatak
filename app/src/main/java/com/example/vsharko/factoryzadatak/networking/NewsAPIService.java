@@ -1,4 +1,4 @@
-package com.example.vsharko.factoryzadatak.helpers.networking;
+package com.example.vsharko.factoryzadatak.networking;
 
 import com.example.vsharko.factoryzadatak.model.ArticlesList;
 

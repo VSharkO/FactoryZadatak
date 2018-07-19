@@ -1,4 +1,4 @@
-package com.example.vsharko.factoryzadatak.helpers;
+package com.example.vsharko.factoryzadatak.networking;
 
 public interface ResponseListener<T> {
     void onSuccess(T callback);

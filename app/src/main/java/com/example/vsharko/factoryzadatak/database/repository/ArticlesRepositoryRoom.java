@@ -13,7 +13,7 @@ public class ArticlesRepositoryRoom implements ArticlesRepository {
 
     public ArticlesRepositoryRoom() {
             ArticlesRoomDatabase database = ArticlesRoomDatabase.getDatabase(App.getInstance().getApplicationContext());
-            articlesDao= database.articlesDao();
+            articlesDao=database.articlesDao();
     }
 
     @Override
