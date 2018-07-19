@@ -1,8 +1,6 @@
 package com.example.vsharko.factoryzadatak.adapters;
-
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,40 +8,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.R;
+import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
 import com.example.vsharko.factoryzadatak.model.Article;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ArticlesViewHolder>{
     private List<Article> articleList;
+    public final OnArticleClickListener listener;
 
-    public RecyclerViewAdapter(List<Article> articleList) {
+    public RecyclerViewAdapter(List<Article> articleList, OnArticleClickListener listener) {
         this.articleList = articleList;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArticlesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.article_layout,parent,false);
-        return new ViewHolder(itemView);
+        return new ArticlesViewHolder(itemView, listener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArticlesViewHolder holder, int position) {
         Article article = articleList.get(position);
-        Glide.with(holder.imageView.getContext())
+        Glide.with(holder.image.getContext())
                 .load(article.getUrlToImage())
-                .into(holder.imageView);
-        holder.textView.setText(article.getTitle());
+                .into(holder.image);
+        holder.title.setText(article.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        Log.i("listNum",String.valueOf(articleList.size()));
         return articleList.size();
     }
 
@@ -56,6 +55,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+    }
+
+    class ArticlesViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.titleview_article) TextView title;
+        @BindView(R.id.imageview_article) ImageView image;
+
+        public ArticlesViewHolder(View itemView, OnArticleClickListener listener) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick
+        public void onTaskClick(){
+            listener.onClick(getAdapterPosition());
         }
     }
 }

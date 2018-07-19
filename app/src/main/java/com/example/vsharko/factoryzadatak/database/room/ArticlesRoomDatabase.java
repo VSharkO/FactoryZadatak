@@ -9,7 +9,7 @@ import android.content.Context;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.utils.Converters;
 
-@Database(entities = {Article.class}, version = 1)
+@Database(entities = {Article.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class ArticlesRoomDatabase extends RoomDatabase {
     public abstract ArticlesDao articlesDao();

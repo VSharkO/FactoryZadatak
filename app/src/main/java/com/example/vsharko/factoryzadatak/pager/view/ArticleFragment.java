@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.pager.presenter.ArticleFragmentPresenter;
 import com.example.vsharko.factoryzadatak.pager.presenter.ArticleFragmentPresenterImpl;
+import com.example.vsharko.factoryzadatak.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +33,7 @@ public class ArticleFragment extends Fragment implements ArticleFragmentView{
 
     public static Fragment newInstance(int index) {
         Bundle data = new Bundle();
-        data.putInt("index", index);
+        data.putInt(Constants.FRAGMENT_PUT_DATA_CONSTANT, index);
         ArticleFragment f = new ArticleFragment();
         f.setArguments(data);
         return f;
@@ -60,7 +61,7 @@ public class ArticleFragment extends Fragment implements ArticleFragmentView{
     @Override
     public void onStart() {
         super.onStart();
-        int index = getArguments().getInt("index");
+        int index = getArguments().getInt(Constants.FRAGMENT_PUT_DATA_CONSTANT);
         presenter.setData(index);
     }
     @Override

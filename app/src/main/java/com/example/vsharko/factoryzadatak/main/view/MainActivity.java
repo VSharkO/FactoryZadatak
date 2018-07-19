@@ -1,6 +1,7 @@
 package com.example.vsharko.factoryzadatak.main.view;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -12,10 +13,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.adapters.RecyclerViewAdapter;
+import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.model.Article;
+import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivity;
+import com.example.vsharko.factoryzadatak.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView {
+public class MainActivity extends AppCompatActivity implements MainActivityView, OnArticleClickListener {
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
     @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     private void initRecyclerView() {
-        adapter = new RecyclerViewAdapter(articleList);
+        adapter = new RecyclerViewAdapter(articleList,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -61,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
 
     private void initAlertDialog(){
         alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Oh! Something went wrong, be sure to check internet connection");
-        alertDialogBuilder.setPositiveButton("yes",
+        alertDialogBuilder.setMessage(Constants.NO_CONNECTION_MASSAGE);
+        alertDialogBuilder.setPositiveButton(Constants.YES,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -103,5 +107,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     @Override
     public void setRefreshingStart(){
         swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(this, ArticlePagerActivity.class);
+        intent.putExtra(Constants.INTENT_PUT_EXTRA_CONSTANT,position);
+        startActivity(intent);
     }
 }

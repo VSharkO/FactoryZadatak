@@ -22,6 +22,7 @@
             android:orientation="vertical"
             android:layout_below="@id/single_article_image"
             android:padding="@dimen/padding_single_article"
+            android:layout_marginBottom="@dimen/bottom_margin"
             android:id="@+id/article"
             >
                 <TextView
@@ -37,33 +38,35 @@
                     android:id="@+id/single_article_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding"
+                    android:paddingBottom="@dimen/padding_single_article_title"
                     android:textSize="@dimen/single_article_text"
                     />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/single_article_readmore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/article"
-            android:layout_marginTop="@dimen/top_margin_readmore"
-            android:textSize="@dimen/single_article_readmore_size"
-            android:paddingLeft="@dimen/padding_single_article"
-            android:paddingRight="@dimen/padding_single_article"
-            android:text="@string/read_more_on"
-            />
+            <TextView
+                android:id="@+id/single_article_readmore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/article"
+                android:textSize="@dimen/single_article_readmore_text_size"
+                android:gravity="center_horizontal|bottom"
+                android:paddingLeft="@dimen/padding_single_article"
+                android:paddingRight="@dimen/padding_single_article"
+                android:text="@string/read_more_on"
+                />
 
-        <TextView
-            android:id="@+id/single_article_link"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/single_article_readmore"
-            android:textSize="@dimen/single_article_readmore_size"
-            android:paddingLeft="@dimen/padding_single_article"
-            android:paddingRight="@dimen/padding_single_article"
-            android:autoLink="web"
-            />
+            <TextView
+                android:id="@+id/single_article_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/single_article_readmore"
+                android:textSize="@dimen/single_article_readmore_text_size"
+                android:paddingLeft="@dimen/padding_single_article"
+                android:paddingRight="@dimen/padding_single_article"
+                android:paddingBottom="@dimen/padding_single_article"
+                android:gravity="center_horizontal|bottom"
+                android:autoLink="web"
+                />
 
     </RelativeLayout>
 
