@@ -35,6 +35,7 @@ public class MainPresenterImpl implements MainPresenter{
 
             @Override
             public void onFailure(Throwable throwable) {
+                new GetArticlesAsync().execute();
                 view.setRefreshingEnd();
                 view.showFailurePopup();
             }
@@ -49,7 +50,7 @@ public class MainPresenterImpl implements MainPresenter{
     @Override
     public void getArticles() {
         //5min = 300000milisec
-        long milliSeconds = 300000;
+        long milliSeconds = 300;
 
         //first time that app is running
         if(model.getArticles().size()==0){
