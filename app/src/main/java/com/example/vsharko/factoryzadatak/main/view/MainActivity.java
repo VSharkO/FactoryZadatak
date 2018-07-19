@@ -11,7 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.vsharko.factoryzadatak.App;
-import com.example.vsharko.factoryzadatak.adapters.MyAdapter;
+import com.example.vsharko.factoryzadatak.adapters.RecyclerViewAdapter;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.R;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     @BindView(R.id.recycler) RecyclerView recyclerView;
     @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
     private List<Article> articleList = new ArrayList<>();
-    private MyAdapter adapter;
+    private RecyclerViewAdapter adapter;
     private MainPresenter presenter;
     private AlertDialog.Builder alertDialogBuilder;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     private void initRecyclerView() {
-        adapter = new MyAdapter(articleList);
+        adapter = new RecyclerViewAdapter(articleList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
