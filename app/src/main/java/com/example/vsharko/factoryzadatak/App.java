@@ -16,7 +16,6 @@ public class App extends Application {
     Retrofit retrofit;
     NetworkingHelper networkingHelper;
     private static App sInstance;
-    FakeDatabase model;
 
     @Override
     public void onCreate(){
@@ -25,7 +24,6 @@ public class App extends Application {
         retrofit = provideRestClient();
         NewsAPIService service = createNewsAPIService(retrofit);
         this.networkingHelper = new NetworkingHelperImpl(service);
-        model = FakeDatabase.getInstance();
 
     }
 
