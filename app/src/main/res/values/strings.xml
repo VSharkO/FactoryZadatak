@@ -2,4 +2,6 @@
     <string name="app_name">FactoryZadatak</string>
     <string name="icon">Icon</string>
     <string name="newsimage">NewsImage</string>
+    <string name="articlepicture">ArticlePicture</string>
+    <string name="read_more_on">Read more on:</string>
 </resources>

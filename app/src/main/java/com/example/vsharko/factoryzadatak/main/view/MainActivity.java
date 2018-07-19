@@ -11,7 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.vsharko.factoryzadatak.App;
-import com.example.vsharko.factoryzadatak.main.MyAdapter;
+import com.example.vsharko.factoryzadatak.adapters.MyAdapter;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.R;
