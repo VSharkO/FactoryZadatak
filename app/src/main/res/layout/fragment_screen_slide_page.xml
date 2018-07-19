@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/single_article"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/single_article_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/single_article_pic_dimen"
+            android:contentDescription="@string/articlepicture"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/single_article_image"
+            android:padding="@dimen/padding_single_article"
+            android:id="@+id/article"
+            >
+                <TextView
+                    android:id="@+id/single_article_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_single_article_title"
+                    style="@style/title_single_article"
+                    android:textSize="@dimen/title_single_article_textSize"
+                    />
+
+                <TextView
+                    android:id="@+id/single_article_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding"
+                    android:textSize="@dimen/single_article_text"
+                    />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/single_article_readmore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/article"
+            android:layout_marginTop="@dimen/top_margin_readmore"
+            android:textSize="@dimen/single_article_readmore_size"
+            android:paddingLeft="@dimen/padding_single_article"
+            android:paddingRight="@dimen/padding_single_article"
+            android:text="@string/read_more_on"
+            />
+
+        <TextView
+            android:id="@+id/single_article_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/single_article_readmore"
+            android:textSize="@dimen/single_article_readmore_size"
+            android:paddingLeft="@dimen/padding_single_article"
+            android:paddingRight="@dimen/padding_single_article"
+            android:autoLink="web"
+            />
+
+    </RelativeLayout>
+
+</ScrollView>
