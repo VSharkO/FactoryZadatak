@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
     @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
-    private List<Article> articleList = new ArrayList<>();
     private RecyclerViewAdapter adapter;
     private MainPresenter presenter;
     private AlertDialog.Builder alertDialogBuilder;
@@ -45,11 +44,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         initAlertDialog();
         initRecyclerView();
         initSwipeRefresh();
-        presenter.getArticles();
+
     }
 
     private void initRecyclerView() {
-        adapter = new RecyclerViewAdapter(articleList,this);
+        adapter = new RecyclerViewAdapter(this);
+        presenter.getArticles();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -88,8 +88,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     @Override
     public void updateAdapterData(List<Article> articles) {
-        articleList.clear();
-        articleList.addAll(articles);
+        adapter.fillData(articles);
         adapter.notifyDataSetChanged();
     }
 

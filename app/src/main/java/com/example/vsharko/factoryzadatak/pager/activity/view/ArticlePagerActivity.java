@@ -15,12 +15,12 @@ import butterknife.ButterKnife;
 
 public class ArticlePagerActivity extends FragmentActivity implements ArticlePagerActivityView {
 
-    private ViewPagerFragmentAdapter mPagerAdapter;
-
     @BindView(R.id.pager)
     ViewPager mPager;
+
     int index;
     private ArticlePagerPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,7 @@ public class ArticlePagerActivity extends FragmentActivity implements ArticlePag
         ButterKnife.bind(this);
         initPresenter();
         index = getIntent().getIntExtra(Constants.INTENT_PUT_EXTRA_CONSTANT,0);
-        mPagerAdapter = new ViewPagerFragmentAdapter(getSupportFragmentManager());
+        ViewPagerFragmentAdapter mPagerAdapter = new ViewPagerFragmentAdapter(getSupportFragmentManager());
         mPagerAdapter.setAdapterData(presenter.getData());
         mPager.setAdapter(mPagerAdapter);
         mPager.setCurrentItem(index);

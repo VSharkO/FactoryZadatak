@@ -1,12 +1,10 @@
 package com.example.vsharko.factoryzadatak.main.presenter;
-import android.os.AsyncTask;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
 import com.example.vsharko.factoryzadatak.networking.ResponseListener;
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
 import com.example.vsharko.factoryzadatak.model.Article;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,13 +27,13 @@ public class MainPresenterImpl implements MainPresenter{
             @Override
             public void onSuccess(List<Article> callback) {
                 model.setListOfArticles(callback);
-                new GetArticlesAsyncFromDB().execute();
+                getArticlesFromDB(model.getArticles());
                 //Log.i("Op","Tu je");
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-                new GetArticlesAsyncFromDB().execute();
+                getArticlesFromDB(model.getArticles());
                 view.showFailurePopup();
             }
         });
@@ -62,19 +60,7 @@ public class MainPresenterImpl implements MainPresenter{
         }
 
         else{
-            new GetArticlesAsyncFromDB().execute();
-        }
-    }
-
-    private class GetArticlesAsyncFromDB extends AsyncTask<Void, Void, List<Article>> {
-
-        @Override
-        protected List<Article> doInBackground(Void... voids) {
-            return model.getArticles();
-        }
-
-        protected void onPostExecute(List<Article> articles) {
-           getArticlesFromDB(articles);
+            getArticlesFromDB(model.getArticles());
         }
     }
 }

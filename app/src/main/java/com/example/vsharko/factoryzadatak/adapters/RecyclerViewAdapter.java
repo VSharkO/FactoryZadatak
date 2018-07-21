@@ -10,18 +10,24 @@ import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
 import com.example.vsharko.factoryzadatak.model.Article;
+
+import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ArticlesViewHolder>{
-    private List<Article> articleList;
-    public final OnArticleClickListener listener;
+    private List<Article> articleList = new ArrayList<>();
+    private OnArticleClickListener listener;
 
-    public RecyclerViewAdapter(List<Article> articleList, OnArticleClickListener listener) {
-        this.articleList = articleList;
+    public RecyclerViewAdapter(OnArticleClickListener listener) {
         this.listener = listener;
+    }
+
+    public void fillData(List<Article> articles){
+        articleList.clear();
+        articleList.addAll(articles);
     }
 
     @NonNull
