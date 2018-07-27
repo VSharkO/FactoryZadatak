@@ -1,5 +1,7 @@
 package com.example.vsharko.factoryzadatak.networking.helpers;
 
+import android.support.annotation.NonNull;
+
 import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
 import com.example.vsharko.factoryzadatak.networking.ResponseListener;
 import com.example.vsharko.factoryzadatak.model.Article;
@@ -15,7 +17,7 @@ import retrofit2.Response;
 
 public class NetworkingHelperImpl implements NetworkingHelper {
 
-    private NewsAPIService service;
+    private final NewsAPIService service;
 
     public NetworkingHelperImpl(NewsAPIService service) {
         this.service = service;
@@ -25,7 +27,7 @@ public class NetworkingHelperImpl implements NetworkingHelper {
     public void getNewsFromAPI(final ResponseListener<List<Article>> listener) {
         service.getNews(Constants.NEWS_API_LINK).enqueue(new Callback<ArticlesList>() {
             @Override
-            public void onResponse(Call<ArticlesList> call, Response<ArticlesList> response) {
+            public void onResponse(@NonNull Call<ArticlesList> call,@NonNull Response<ArticlesList> response) {
                 if (response.body()!=null){
                     ArticlesList data = response.body();
                     if(data!=null)
@@ -36,7 +38,7 @@ public class NetworkingHelperImpl implements NetworkingHelper {
             }
 
             @Override
-            public void onFailure(Call<ArticlesList> call, Throwable t) {
+            public void onFailure(@NonNull Call<ArticlesList> call,@NonNull Throwable t) {
                 listener.onFailure(t);
             }
         });

@@ -12,8 +12,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
-    Retrofit retrofit;
-    NetworkingHelper networkingHelper;
+    private Retrofit retrofit;
+    private NetworkingHelper networkingHelper;
     private static App sInstance;
 
     @Override

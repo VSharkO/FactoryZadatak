@@ -49,7 +49,7 @@ public class ArticleFragment extends Fragment implements ArticleFragmentView{
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initPresenter();
     }

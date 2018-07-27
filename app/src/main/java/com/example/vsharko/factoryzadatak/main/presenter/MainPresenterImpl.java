@@ -10,9 +10,9 @@ import java.util.List;
 
 public class MainPresenterImpl implements MainPresenter{
 
-    private MainActivityView view;
-    private ArticlesRepository model;
-    private NetworkingHelper networkingHelper;
+    private final MainActivityView view;
+    private final ArticlesRepository model;
+    private final NetworkingHelper networkingHelper;
 
     public MainPresenterImpl(MainActivityView view, NetworkingHelper networkingHelper) {
         this.view = view;

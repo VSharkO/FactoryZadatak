@@ -29,10 +29,10 @@ public class Article {
     public void setAuthor(String input){
         this.author = input;
     }
-    public String getTitle(){
+    @NonNull public String getTitle(){
         return title;
     }
-    public void setTitle(String input){
+    public void setTitle(@NonNull String input){
         this.title = input;
     }
     public String getDescription(){

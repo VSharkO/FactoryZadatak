@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ArticlesRepositoryRoom implements ArticlesRepository {
 
-    private ArticlesDao articlesDao;
+    private final ArticlesDao articlesDao;
 
     public ArticlesRepositoryRoom() {
             ArticlesRoomDatabase database = ArticlesRoomDatabase.getDatabase(App.getInstance().getApplicationContext());

@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ArticlesViewHolder>{
-    private List<Article> articleList = new ArrayList<>();
-    private OnArticleClickListener listener;
+    private final List<Article> articleList = new ArrayList<>();
+    private final OnArticleClickListener listener;
 
     public RecyclerViewAdapter(OnArticleClickListener listener) {
         this.listener = listener;
@@ -52,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return articleList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.imageview_article)
         ImageView imageView;
         @BindView(R.id.titleview_article)
@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @BindView(R.id.titleview_article) TextView title;
         @BindView(R.id.imageview_article) ImageView image;
 
-        public ArticlesViewHolder(View itemView, OnArticleClickListener listener) {
+        ArticlesViewHolder(View itemView, OnArticleClickListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

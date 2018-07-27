@@ -18,7 +18,7 @@ public class ArticlePagerActivity extends FragmentActivity implements ArticlePag
     @BindView(R.id.pager)
     ViewPager mPager;
 
-    int index;
+    private int index;
     private ArticlePagerPresenter presenter;
 
     @Override

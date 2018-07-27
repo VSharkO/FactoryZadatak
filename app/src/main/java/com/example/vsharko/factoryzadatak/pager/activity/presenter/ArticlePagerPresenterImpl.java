@@ -10,7 +10,7 @@ import java.util.List;
 public class ArticlePagerPresenterImpl implements ArticlePagerPresenter {
 
     private ArticlePagerActivityView view;
-    private ArticlesRepository repository;
+    private final ArticlesRepository repository;
 
     public ArticlePagerPresenterImpl(ArticlePagerActivityView view) {
         setView(view);

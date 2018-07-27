@@ -20,8 +20,6 @@ import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivity;
 import com.example.vsharko.factoryzadatak.utils.Constants;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,8 +27,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainActivityView, OnArticleClickListener {
 
-    @BindView(R.id.recycler) RecyclerView recyclerView;
-    @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.recycler)RecyclerView recyclerView;
+    @BindView(R.id.swipeRefresh)SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerViewAdapter adapter;
     private MainPresenter presenter;
     private AlertDialog.Builder alertDialogBuilder;
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         initAlertDialog();
         initRecyclerView();
         initSwipeRefresh();
-
     }
 
     private void initRecyclerView() {
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
                 });
     }
 
-    public void initSwipeRefresh() {
+    private void initSwipeRefresh() {
         swipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override

@@ -9,7 +9,7 @@ import com.example.vsharko.factoryzadatak.pager.view.ArticleFragmentView;
 public class ArticleFragmentPresenterImpl implements ArticleFragmentPresenter {
 
     private ArticleFragmentView view;
-    private ArticlesRepository repository;
+    private final ArticlesRepository repository;
 
     public ArticleFragmentPresenterImpl(ArticleFragment view) {
         setView(view);

@@ -13,7 +13,7 @@ public class FakeDatabase implements ArticlesRepository {
     private FakeDatabase() {
     }
 
-    private List<Article> listOfArticles = new ArrayList<>();
+    private final List<Article> listOfArticles = new ArrayList<>();
 
     public static FakeDatabase getInstance() {
         if (model == null) {
