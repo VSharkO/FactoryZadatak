@@ -52,18 +52,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return articleList.size();
     }
 
-        class ViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.imageview_article)
-        ImageView imageView;
-        @BindView(R.id.titleview_article)
-        TextView textView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this,itemView);
-        }
-    }
-
     class ArticlesViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.titleview_article) TextView title;
