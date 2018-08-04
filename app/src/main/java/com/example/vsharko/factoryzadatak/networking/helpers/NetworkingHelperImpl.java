@@ -14,6 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class NetworkingHelperImpl implements NetworkingHelper {
 
@@ -32,7 +33,7 @@ public class NetworkingHelperImpl implements NetworkingHelper {
                     ArticlesList data = response.body();
                     if(data!=null)
                         listener.onSuccess(data.getArticles());
-
+                    Timber.i("ušo");
                 }
 
             }
