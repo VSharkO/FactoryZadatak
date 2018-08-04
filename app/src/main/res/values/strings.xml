@@ -3,4 +3,5 @@
     <string name="newsimage">NewsImage</string>
     <string name="articlepicture">ArticlePicture</string>
     <string name="read_more_on">Read more on:</string>
+    <string name="no_connection_massage">Oh! Something went wrong, be sure to check internet connection to refresh</string>
 </resources>

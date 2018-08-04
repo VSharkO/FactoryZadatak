@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     private void initAlertDialog(){
         alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(Constants.NO_CONNECTION_MASSAGE);
-        alertDialogBuilder.setPositiveButton(Constants.YES,
+        alertDialogBuilder.setMessage(getString(R.string.no_connection_massage));
+        alertDialogBuilder.setPositiveButton(android.R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {

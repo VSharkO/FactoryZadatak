@@ -2,7 +2,6 @@ package com.example.vsharko.factoryzadatak;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
-
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelperImpl;
 import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
@@ -44,7 +43,7 @@ public class App extends Application {
     }
 
     public NetworkingHelper getNetworkingHelper(){
-        return this.networkingHelper;
+        return sInstance.networkingHelper;
     }
 
 }

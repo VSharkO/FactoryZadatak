@@ -25,7 +25,7 @@ public class NetworkingHelperImpl implements NetworkingHelper {
 
     @Override
     public void getNewsFromAPI(final ResponseListener<List<Article>> listener) {
-        service.getNews(Constants.NEWS_API_LINK).enqueue(new Callback<ArticlesList>() {
+        service.getNews(Constants.VERSION,Constants.SOURCE,Constants.SORT_BY,Constants.API_KEY).enqueue(new Callback<ArticlesList>() {
             @Override
             public void onResponse(@NonNull Call<ArticlesList> call,@NonNull Response<ArticlesList> response) {
                 if (response.body()!=null){
