@@ -10,7 +10,6 @@ import retrofit2.http.Url;
 
 public interface NewsAPIService {
 
-    @GET("/{version}/articles")
-    Call<ArticlesList> getNews(@Path ("version") String version, @Query("source") String source,
-                               @Query("sortBy") String sortBy,@Query("apiKey") String apiKey);
+    @GET("/")
+    Call<ArticlesList> getNews();
 }
