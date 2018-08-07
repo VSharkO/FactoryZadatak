@@ -1,6 +1,6 @@
 package com.example.vsharko.factoryzadatak.networking.networkDI;
 
-import com.example.vsharko.factoryzadatak.AppSope;
+import com.example.vsharko.factoryzadatak.AppScope;
 import com.example.vsharko.factoryzadatak.BuildConfig;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 
@@ -20,7 +20,7 @@ import timber.log.Timber;
 public class OkhttpModule {
 
     @Provides
-    @AppSope
+    @AppScope
     public OkHttpClient provideOkHttpClient(Interceptor interceptor, HttpLoggingInterceptor logging ){
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder().addInterceptor(interceptor);
         if(BuildConfig.DEBUG) {
@@ -31,7 +31,7 @@ public class OkhttpModule {
 
 
     @Provides
-    @AppSope
+    @AppScope
     public Interceptor provideInterceptor() {
         Interceptor interceptor = new Interceptor() {
             @Override
@@ -55,7 +55,7 @@ public class OkhttpModule {
     }
 
     @Provides
-    @AppSope
+    @AppScope
     public HttpLoggingInterceptor provideLogging() {
         HttpLoggingInterceptor.Logger logger = new HttpLoggingInterceptor.Logger() {
             @Override

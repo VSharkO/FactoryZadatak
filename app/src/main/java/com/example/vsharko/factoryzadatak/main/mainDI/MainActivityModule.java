@@ -2,7 +2,7 @@ package com.example.vsharko.factoryzadatak.main.mainDI;
 
 import android.content.Context;
 
-import com.example.vsharko.factoryzadatak.AppSope;
+import com.example.vsharko.factoryzadatak.AppScope;
 import com.example.vsharko.factoryzadatak.main.view.MainActivity;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 
@@ -11,6 +11,7 @@ import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 import dagger.Module;
 import dagger.Provides;
 
+@AppScope
 @Module
 public class MainActivityModule {
 
@@ -20,13 +21,13 @@ public class MainActivityModule {
         mMainActivity = mainActivity;
     }
 
-    @AppSope
+    @AppScope
     @Provides
     MainActivityView provideMainActivity(){
         return mMainActivity;
     }
 
-    @AppSope
+    @AppScope
     @Provides
     Context provideContext(){
         return mMainActivity;

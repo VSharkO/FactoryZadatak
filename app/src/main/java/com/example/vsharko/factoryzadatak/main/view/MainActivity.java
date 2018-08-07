@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.example.vsharko.factoryzadatak.adapters.RecyclerViewAdapter;
+import com.example.vsharko.factoryzadatak.database.repository.repositoryDI.RepositoryModule;
 import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
 import com.example.vsharko.factoryzadatak.main.mainDI.DaggerMainComponent;
 import com.example.vsharko.factoryzadatak.main.mainDI.MainActivityModule;
@@ -39,10 +40,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         MainComponent component = DaggerMainComponent.builder()
-                .mainModule(new MainModule())
                 .mainActivityModule(new MainActivityModule(this))
+                .repositoryModule(new RepositoryModule(this))
                 .build();
+
         presenter = component.injectPresenter();
         alertDialog = component.injectAlertDialog();
         provideRecyclerViewAdapter();

@@ -1,19 +1,25 @@
 package com.example.vsharko.factoryzadatak.database.repository;
-
 import com.example.vsharko.factoryzadatak.App;
+import com.example.vsharko.factoryzadatak.database.repository.repositoryDI.DaggerRepositoryComponent;
+import com.example.vsharko.factoryzadatak.database.repository.repositoryDI.RepositoryComponent;
+import com.example.vsharko.factoryzadatak.database.repository.repositoryDI.RepositoryModule;
 import com.example.vsharko.factoryzadatak.database.room.ArticlesDao;
-import com.example.vsharko.factoryzadatak.database.room.ArticlesRoomDatabase;
 import com.example.vsharko.factoryzadatak.model.Article;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ArticlesRepositoryRoom implements ArticlesRepository {
 
-    private final ArticlesDao articlesDao;
+    private ArticlesDao articlesDao;
 
+    @Inject
     public ArticlesRepositoryRoom() {
-            ArticlesRoomDatabase database = ArticlesRoomDatabase.getDatabase(App.getInstance().getApplicationContext());
-            articlesDao=database.articlesDao();
+        RepositoryComponent component = DaggerRepositoryComponent.builder()
+                .repositoryModule(new RepositoryModule(App.getInstance().getApplicationContext()))
+                .build();
+        articlesDao = component.injectDao();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.vsharko.factoryzadatak;
 
 import android.app.Application;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.bumptech.glide.RequestBuilder;

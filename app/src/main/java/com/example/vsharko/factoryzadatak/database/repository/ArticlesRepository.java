@@ -5,7 +5,8 @@ import com.example.vsharko.factoryzadatak.model.Article;
 import java.util.List;
 
 public interface ArticlesRepository {
-    List<Article> getArticles();
 
+    List<Article> getArticles();
     void setListOfArticles(List<Article> listOfArticles);
+
 }
