@@ -1,5 +1,7 @@
-package com.example.vsharko.factoryzadatak;
+package com.example.vsharko.factoryzadatak.networking.networkDI;
 
+import com.example.vsharko.factoryzadatak.AppSope;
+import com.example.vsharko.factoryzadatak.BuildConfig;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 
 import java.io.IOException;
@@ -16,7 +18,6 @@ import timber.log.Timber;
 
 @Module
 public class OkhttpModule {
-
 
     @Provides
     @AppSope

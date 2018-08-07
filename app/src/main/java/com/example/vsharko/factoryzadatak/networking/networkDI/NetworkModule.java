@@ -1,4 +1,5 @@
-package com.example.vsharko.factoryzadatak;
+package com.example.vsharko.factoryzadatak.networking.networkDI;
+import com.example.vsharko.factoryzadatak.AppSope;
 import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelperImpl;

@@ -23,23 +23,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
 public class App extends Application {
-    private NetworkingHelper mNetworkingHelper;
     private static App sInstance;
 
     @Override
     public void onCreate(){
         super.onCreate();
         sInstance = this;
-        AppComponent component = DaggerAppComponent.builder().build();
-        this.mNetworkingHelper = component.getNetworkHelper();
         Timber.plant(new Timber.DebugTree());
     }
     public static App getInstance() {
         return sInstance;
-    }
-
-    public NetworkingHelper getNetworkHelper(){
-        return mNetworkingHelper;
     }
 
 }

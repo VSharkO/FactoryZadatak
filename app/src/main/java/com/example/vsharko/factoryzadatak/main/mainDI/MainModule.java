@@ -3,7 +3,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import com.example.vsharko.factoryzadatak.AppSope;
-import com.example.vsharko.factoryzadatak.NetworkModule;
+import com.example.vsharko.factoryzadatak.networking.networkDI.NetworkModule;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
