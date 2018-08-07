@@ -16,7 +16,7 @@ public class MainPresenterImpl implements MainPresenter{
     private final ArticlesRepository model;
     private final NetworkingHelper networkingHelper;
 
-    @Inject public MainPresenterImpl(MainActivityView view, NetworkingHelper networkingHelper) {
+    public MainPresenterImpl(MainActivityView view, NetworkingHelper networkingHelper) {
         this.view = view;
         this.networkingHelper = networkingHelper;
         this.model = new ArticlesRepositoryRoom();
