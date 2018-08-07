@@ -23,75 +23,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
 public class App extends Application {
-    private Retrofit retrofit;
-    private NetworkingHelper networkingHelper;
+    private NetworkingHelper mNetworkingHelper;
     private static App sInstance;
 
     @Override
     public void onCreate(){
         super.onCreate();
         sInstance = this;
-        retrofit = provideRestClient();
-        NewsAPIService service = createNewsAPIService(retrofit);
-        this.networkingHelper = new NetworkingHelperImpl(service);
+        AppComponent component = DaggerAppComponent.builder().build();
+        this.mNetworkingHelper = component.getNetworkHelper();
         Timber.plant(new Timber.DebugTree());
     }
-
-    private NewsAPIService createNewsAPIService(Retrofit retrofit) {
-        return retrofit.create(NewsAPIService.class);
-    }
-
-    @NonNull
-    private Retrofit provideRestClient() {
-
-        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-                HttpUrl httpUrl= original.url();
-
-                HttpUrl newHttpUrl = httpUrl.newBuilder()
-                        .addPathSegments(Constants.VERSION)
-                        .addPathSegments(Constants.ARTICLES)
-                        .addQueryParameter("source",Constants.SOURCE)
-                        .addQueryParameter("sortBy",Constants.SORT_BY)
-                        .addQueryParameter("apiKey",Constants.API_KEY)
-                        .build();
-
-                Request.Builder requestBuilder = original.newBuilder().url(newHttpUrl);
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            }
-        });
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Timber.d(message);
-            }
-
-        });
-
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-         if(BuildConfig.DEBUG) {
-             okHttpClientBuilder.addInterceptor(logging);
-         }
-
-
-        return new Retrofit.Builder()
-                .baseUrl(Constants.NEWS_API_BASE_URL)
-                .client(okHttpClientBuilder.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
-
     public static App getInstance() {
         return sInstance;
     }
 
-    public NetworkingHelper getNetworkingHelper(){
-        return sInstance.networkingHelper;
+    public NetworkingHelper getNetworkHelper(){
+        return mNetworkingHelper;
     }
 
 }

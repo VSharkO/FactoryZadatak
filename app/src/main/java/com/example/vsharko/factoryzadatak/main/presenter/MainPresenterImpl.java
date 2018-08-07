@@ -8,13 +8,15 @@ import com.example.vsharko.factoryzadatak.model.Article;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainPresenterImpl implements MainPresenter{
 
     private final MainActivityView view;
     private final ArticlesRepository model;
     private final NetworkingHelper networkingHelper;
 
-    public MainPresenterImpl(MainActivityView view, NetworkingHelper networkingHelper) {
+    @Inject public MainPresenterImpl(MainActivityView view, NetworkingHelper networkingHelper) {
         this.view = view;
         this.networkingHelper = networkingHelper;
         this.model = new ArticlesRepositoryRoom();
@@ -28,7 +30,6 @@ public class MainPresenterImpl implements MainPresenter{
             public void onSuccess(List<Article> callback) {
                 model.setListOfArticles(callback);
                 getArticlesFromDB(model.getArticles());
-                //Log.i("Op","Tu je");
             }
 
             @Override

@@ -1,6 +1,4 @@
 package com.example.vsharko.factoryzadatak.main.view;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,17 +8,20 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.adapters.RecyclerViewAdapter;
 import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
-import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
+import com.example.vsharko.factoryzadatak.main.mainDI.DaggerMainComponent;
+import com.example.vsharko.factoryzadatak.main.mainDI.MainActivityModule;
+import com.example.vsharko.factoryzadatak.main.mainDI.MainComponent;
+import com.example.vsharko.factoryzadatak.main.mainDI.MainModule;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivity;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,22 +30,29 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     @BindView(R.id.recycler)RecyclerView recyclerView;
     @BindView(R.id.swipeRefresh)SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerViewAdapter adapter;
-    private MainPresenter presenter;
-    private AlertDialog.Builder alertDialogBuilder;
+
+    public MainPresenter presenter;
+    public AlertDialog alertDialog;
+    public RecyclerViewAdapter adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initPresenter();
-        initAlertDialog();
-        initRecyclerView();
+        MainComponent component = DaggerMainComponent.builder()
+                .mainModule(new MainModule())
+                .mainActivityModule(new MainActivityModule(this))
+                .build();
+        presenter = component.injectPresenter();
+        alertDialog = component.injectAlertDialog();
+        provideRecyclerViewAdapter();
         initSwipeRefresh();
     }
 
-    private void initRecyclerView() {
+    public void provideRecyclerViewAdapter() {
         adapter = new RecyclerViewAdapter(this);
         presenter.getArticles();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -54,22 +62,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-    }
-
-    private void initPresenter() {
-        this.presenter = new MainPresenterImpl(this, App.getInstance().getNetworkingHelper());
-    }
-
-    private void initAlertDialog(){
-        alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(getString(R.string.no_connection_massage));
-        alertDialogBuilder.setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-
-                    }
-                });
     }
 
     private void initSwipeRefresh() {
@@ -91,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     @Override
     public void showFailurePopup() {
-        AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
 
