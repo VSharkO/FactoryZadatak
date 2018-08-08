@@ -21,9 +21,7 @@ import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivity;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -39,20 +37,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     public RecyclerViewAdapter adapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         MainComponent component = DaggerMainComponent.builder()
                 .mainActivityModule(new MainActivityModule(this))
                 .appComponent(App.getInstance().getAppComponent())
                 .build();
-
         component.inject(this);
+
         provideRecyclerViewAdapter();
         initSwipeRefresh();
     }
@@ -66,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
     private void initSwipeRefresh() {

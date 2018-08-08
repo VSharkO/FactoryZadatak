@@ -5,6 +5,7 @@ import com.example.vsharko.factoryzadatak.main.view.MainActivity;
 
 
 import dagger.Component;
+
 @PerActivity
 @Component(modules = {MainModule.class,MainActivityModule.class}, dependencies = AppComponent.class)
 
