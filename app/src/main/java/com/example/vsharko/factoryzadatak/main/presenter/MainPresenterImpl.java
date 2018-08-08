@@ -7,6 +7,8 @@ import com.example.vsharko.factoryzadatak.model.Article;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainPresenterImpl implements MainPresenter{
 
     private final MainActivityView view;

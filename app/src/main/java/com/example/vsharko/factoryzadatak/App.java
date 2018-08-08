@@ -1,39 +1,29 @@
 package com.example.vsharko.factoryzadatak;
 
 import android.app.Application;
-import android.app.DownloadManager;
-import android.content.Context;
-import android.support.annotation.NonNull;
 
-import com.bumptech.glide.RequestBuilder;
-import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
-import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelperImpl;
-import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
-import com.example.vsharko.factoryzadatak.utils.Constants;
+import com.example.vsharko.factoryzadatak.database.repository.RepositoryModule;
 
-import java.io.IOException;
-
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
-public class App extends Application {
+public class App extends Application{
     private static App sInstance;
-
+    private AppComponent mAppComponent;
     @Override
     public void onCreate(){
         super.onCreate();
         sInstance = this;
         Timber.plant(new Timber.DebugTree());
+        mAppComponent = DaggerAppComponent.builder()
+                .repositoryModule(new RepositoryModule(this))
+                .build();
     }
+
     public static App getInstance() {
         return sInstance;
     }
 
+    public AppComponent getAppComponent() {
+        return mAppComponent;
+    }
 }

@@ -8,19 +8,22 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.adapters.RecyclerViewAdapter;
-import com.example.vsharko.factoryzadatak.database.repository.repositoryDI.RepositoryModule;
 import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
 import com.example.vsharko.factoryzadatak.main.mainDI.DaggerMainComponent;
 import com.example.vsharko.factoryzadatak.main.mainDI.MainActivityModule;
 import com.example.vsharko.factoryzadatak.main.mainDI.MainComponent;
-import com.example.vsharko.factoryzadatak.main.mainDI.MainModule;
-import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.R;
+import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivity;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,8 +32,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
     @BindView(R.id.recycler)RecyclerView recyclerView;
     @BindView(R.id.swipeRefresh)SwipeRefreshLayout swipeRefreshLayout;
 
+    @Inject
     public MainPresenter presenter;
+    @Inject
     public AlertDialog alertDialog;
+
     public RecyclerViewAdapter adapter;
 
 
@@ -43,11 +49,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
         MainComponent component = DaggerMainComponent.builder()
                 .mainActivityModule(new MainActivityModule(this))
-                .repositoryModule(new RepositoryModule(this))
+                .appComponent(App.getInstance().getAppComponent())
                 .build();
 
-        presenter = component.injectPresenter();
-        alertDialog = component.injectAlertDialog();
+        component.inject(this);
         provideRecyclerViewAdapter();
         initSwipeRefresh();
     }

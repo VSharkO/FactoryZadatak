@@ -2,10 +2,9 @@ package com.example.vsharko.factoryzadatak.main.mainDI;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import com.example.vsharko.factoryzadatak.AppScope;
+
+import com.example.vsharko.factoryzadatak.Scopes.PerActivity;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
-import com.example.vsharko.factoryzadatak.database.repository.repositoryDI.RepositoryModule;
-import com.example.vsharko.factoryzadatak.networking.networkDI.NetworkModule;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
 import com.example.vsharko.factoryzadatak.main.presenter.MainPresenterImpl;
@@ -15,17 +14,17 @@ import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = {NetworkModule.class,MainActivityModule.class, RepositoryModule.class})
+@Module(includes = {MainActivityModule.class})
 public class MainModule {
 
-    @AppScope
+    @PerActivity
     @Provides
     MainPresenter providePresenter(MainActivityView view, NetworkingHelper helper,
                                    ArticlesRepository repository){
         return new MainPresenterImpl(view,helper,repository);
     }
 
-    @AppScope
+    @PerActivity
     @Provides
     public AlertDialog provideAlertDialog(Context context){
         AlertDialog.Builder mAlertDialogBuilder = new AlertDialog.Builder(context);
@@ -40,7 +39,5 @@ public class MainModule {
 
         return mAlertDialogBuilder.create();
     }
-
-
 
 }

@@ -1,10 +1,11 @@
 package com.example.vsharko.factoryzadatak.networking.networkDI;
-import com.example.vsharko.factoryzadatak.AppScope;
 import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelper;
 import com.example.vsharko.factoryzadatak.networking.helpers.NetworkingHelperImpl;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,12 +16,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = OkhttpModule.class)
 public class NetworkModule {
 
-    @AppScope
+    @Singleton
     @Provides
     public NetworkingHelper provideNetworkingHelper(NewsAPIService service){
         return new NetworkingHelperImpl(service);
     }
-    @AppScope
+    @Singleton
     @Provides
     public Retrofit provideRestClient(OkHttpClient okHttpClient) {
             return new Retrofit.Builder()
@@ -29,7 +30,7 @@ public class NetworkModule {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
     }
-    @AppScope
+    @Singleton
     @Provides
     public NewsAPIService provideNewsAPIService(Retrofit retrofit) {
         return retrofit.create(NewsAPIService.class);

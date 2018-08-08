@@ -1,15 +1,13 @@
 package com.example.vsharko.factoryzadatak.main.mainDI;
-import android.support.v7.app.AlertDialog;
-
-import com.example.vsharko.factoryzadatak.AppScope;
-import com.example.vsharko.factoryzadatak.main.presenter.MainPresenter;
+import com.example.vsharko.factoryzadatak.AppComponent;
+import com.example.vsharko.factoryzadatak.Scopes.PerActivity;
 import com.example.vsharko.factoryzadatak.main.view.MainActivity;
 
-import dagger.Component;
 
-@AppScope
-@Component(modules = {MainModule.class,MainActivityModule.class})
+import dagger.Component;
+@PerActivity
+@Component(modules = {MainModule.class,MainActivityModule.class}, dependencies = AppComponent.class)
+
 public interface MainComponent {
-    MainPresenter injectPresenter();
-    AlertDialog injectAlertDialog();
+    void inject(MainActivity mainActivity);
 }
