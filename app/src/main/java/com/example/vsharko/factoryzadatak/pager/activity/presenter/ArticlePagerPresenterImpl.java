@@ -1,19 +1,21 @@
 package com.example.vsharko.factoryzadatak.pager.activity.presenter;
 
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
-import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivityView;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class ArticlePagerPresenterImpl implements ArticlePagerPresenter {
 
     private ArticlePagerActivityView view;
     private final ArticlesRepository repository;
 
-    public ArticlePagerPresenterImpl(ArticlePagerActivityView view) {
+    @Inject
+    public ArticlePagerPresenterImpl(ArticlePagerActivityView view, ArticlesRepository repository) {
         setView(view);
-        repository = new ArticlesRepositoryRoom();
+        this.repository = repository;
     }
 
     @Override
