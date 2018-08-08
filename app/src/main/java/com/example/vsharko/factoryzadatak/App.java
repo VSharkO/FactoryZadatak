@@ -1,9 +1,7 @@
 package com.example.vsharko.factoryzadatak;
 
 import android.app.Application;
-
 import com.example.vsharko.factoryzadatak.database.repository.RepositoryModule;
-
 import timber.log.Timber;
 
 public class App extends Application{

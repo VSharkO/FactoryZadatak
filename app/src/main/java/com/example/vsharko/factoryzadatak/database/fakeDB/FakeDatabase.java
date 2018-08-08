@@ -3,7 +3,6 @@
 package com.example.vsharko.factoryzadatak.database.fakeDB;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
 import com.example.vsharko.factoryzadatak.model.Article;
-
 import java.util.ArrayList;
 import java.util.List;
 

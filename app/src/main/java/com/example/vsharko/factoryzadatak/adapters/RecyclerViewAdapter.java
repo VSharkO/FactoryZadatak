@@ -10,12 +10,8 @@ import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;
 import com.example.vsharko.factoryzadatak.model.Article;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

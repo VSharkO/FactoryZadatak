@@ -1,9 +1,6 @@
 package com.example.vsharko.factoryzadatak.database.repository;
 
 import android.content.Context;
-
-import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
-import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
 import com.example.vsharko.factoryzadatak.database.room.ArticlesDao;
 import com.example.vsharko.factoryzadatak.database.room.ArticlesRoomDatabase;
 import dagger.Module;

@@ -3,7 +3,6 @@ package com.example.vsharko.factoryzadatak.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
-
 import java.util.Calendar;
 import java.util.Date;
 

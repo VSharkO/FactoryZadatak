@@ -1,4 +1,4 @@
-package com.example.vsharko.factoryzadatak.Scopes;
+package com.example.vsharko.factoryzadatak.scopes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

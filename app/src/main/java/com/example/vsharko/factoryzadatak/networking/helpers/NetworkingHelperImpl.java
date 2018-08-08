@@ -6,15 +6,10 @@ import com.example.vsharko.factoryzadatak.networking.NewsAPIService;
 import com.example.vsharko.factoryzadatak.networking.ResponseListener;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.model.ArticlesList;
-import com.example.vsharko.factoryzadatak.utils.Constants;
-
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
 public class NetworkingHelperImpl implements NetworkingHelper {
 

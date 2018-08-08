@@ -9,13 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.pager.presenter.ArticleFragmentPresenter;
 import com.example.vsharko.factoryzadatak.pager.presenter.ArticleFragmentPresenterImpl;
 import com.example.vsharko.factoryzadatak.utils.Constants;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

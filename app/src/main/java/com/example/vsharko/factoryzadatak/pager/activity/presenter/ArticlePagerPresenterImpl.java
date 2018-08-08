@@ -4,7 +4,6 @@ import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepositoryRoom;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.pager.activity.view.ArticlePagerActivityView;
-
 import java.util.List;
 
 public class ArticlePagerPresenterImpl implements ArticlePagerPresenter {

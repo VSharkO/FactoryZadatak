@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.adapters.RecyclerViewAdapter;
 import com.example.vsharko.factoryzadatak.main.OnArticleClickListener;

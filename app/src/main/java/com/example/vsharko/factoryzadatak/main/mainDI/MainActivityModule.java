@@ -1,8 +1,7 @@
 package com.example.vsharko.factoryzadatak.main.mainDI;
 
 import android.content.Context;
-
-import com.example.vsharko.factoryzadatak.Scopes.PerActivity;
+import com.example.vsharko.factoryzadatak.scopes.PerActivity;
 import com.example.vsharko.factoryzadatak.main.view.MainActivity;
 import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 
