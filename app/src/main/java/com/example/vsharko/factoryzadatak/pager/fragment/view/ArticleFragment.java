@@ -1,4 +1,4 @@
-package com.example.vsharko.factoryzadatak.pager.view;
+package com.example.vsharko.factoryzadatak.pager.fragment.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,10 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.vsharko.factoryzadatak.App;
 import com.example.vsharko.factoryzadatak.R;
-import com.example.vsharko.factoryzadatak.pager.presenter.ArticleFragmentPresenter;
-import com.example.vsharko.factoryzadatak.pager.presenter.ArticleFragmentPresenterImpl;
+import com.example.vsharko.factoryzadatak.pager.fragment.articleFragmentDI.ArticleFragmentComponent;
+import com.example.vsharko.factoryzadatak.pager.fragment.articleFragmentDI.ArticleFragmentModule;
+import com.example.vsharko.factoryzadatak.pager.fragment.articleFragmentDI.DaggerArticleFragmentComponent;
+import com.example.vsharko.factoryzadatak.pager.fragment.presenter.ArticleFragmentPresenter;
 import com.example.vsharko.factoryzadatak.utils.Constants;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,7 +33,8 @@ public class ArticleFragment extends Fragment implements ArticleFragmentView{
     @BindView(R.id.single_article_link)
     TextView link;
 
-    private ArticleFragmentPresenter presenter;
+    @Inject
+    public ArticleFragmentPresenter presenter;
 
     public static Fragment newInstance(int index) {
         Bundle data = new Bundle();
@@ -40,8 +47,8 @@ public class ArticleFragment extends Fragment implements ArticleFragmentView{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.fragment_screen_slide_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_screen_slide_page,container,false);
+
         ButterKnife.bind(this,view);
         return view;
     }
@@ -49,11 +56,11 @@ public class ArticleFragment extends Fragment implements ArticleFragmentView{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initPresenter();
-    }
-
-    private void initPresenter() {
-        presenter = new ArticleFragmentPresenterImpl(this);
+        ArticleFragmentComponent component = DaggerArticleFragmentComponent.builder()
+                .articleFragmentModule(new ArticleFragmentModule(this))
+                .appComponent(App.getInstance().getAppComponent())
+                .build();
+        component.inject(this);
     }
 
     @Override

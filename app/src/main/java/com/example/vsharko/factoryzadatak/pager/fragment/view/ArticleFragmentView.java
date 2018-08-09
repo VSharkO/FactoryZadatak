@@ -1,4 +1,4 @@
-package com.example.vsharko.factoryzadatak.pager.view;
+package com.example.vsharko.factoryzadatak.pager.fragment.view;
 
 public interface ArticleFragmentView {
 

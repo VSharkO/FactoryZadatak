@@ -9,6 +9,7 @@ import com.example.vsharko.factoryzadatak.R;
 import com.example.vsharko.factoryzadatak.adapters.ViewPagerFragmentAdapter;
 import com.example.vsharko.factoryzadatak.pager.activity.pagerDI.DaggerPagerComponent;
 import com.example.vsharko.factoryzadatak.pager.activity.pagerDI.PagerComponent;
+import com.example.vsharko.factoryzadatak.pager.activity.pagerDI.PagerModule;
 import com.example.vsharko.factoryzadatak.pager.activity.presenter.ArticlePagerPresenter;
 import com.example.vsharko.factoryzadatak.utils.Constants;
 
@@ -34,6 +35,7 @@ public class ArticlePagerActivity extends FragmentActivity implements ArticlePag
         ButterKnife.bind(this);
         PagerComponent component = DaggerPagerComponent.builder()
                 .appComponent(App.getInstance().getAppComponent())
+                .pagerModule(new PagerModule(this))
                 .build();
 
         component.inject(this);
