@@ -5,7 +5,6 @@ import com.example.vsharko.factoryzadatak.main.view.MainActivityView;
 import com.example.vsharko.factoryzadatak.database.repository.ArticlesRepository;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.utils.DbResponseListener;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,8 +34,18 @@ public class MainPresenterImpl implements MainPresenter{
 
             @Override
             public void onFailure(Throwable throwable) {
-                model.getArticles(listener);
-                view.showFailurePopup();
+                model.getArticles(new DbResponseListener() {
+                    @Override
+                    public void onSuccess(List<Article> callback) {
+                        updateDataFromDb(callback);
+                        view.showFailurePopup();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        view.showFailurePopup();
+                    }
+                });
             }
         });
     }
@@ -46,7 +55,7 @@ public class MainPresenterImpl implements MainPresenter{
         model.getArticles(listener);
     }
 
-    public void updateAdapterData(List<Article> mArticles){
+    public void checkFromWhereToUpdate(List<Article> mArticles){
         //5min = 300000milisec
         long milliSeconds = 300000;
 
@@ -61,17 +70,19 @@ public class MainPresenterImpl implements MainPresenter{
         }
 
         else{
-            view.updateAdapterData(mArticles);
-            view.setRefreshingEnd();
+            updateDataFromDb(mArticles);
         }
+    }
 
-
+    private void updateDataFromDb(List<Article> articles){
+        view.updateAdapterData(articles);
+        view.setRefreshingEnd();
     }
 
     private DbResponseListener listener = new DbResponseListener() {
         @Override
         public void onSuccess(List<Article> callback) {
-            updateAdapterData(callback);
+            checkFromWhereToUpdate(callback);
         }
 
         @Override

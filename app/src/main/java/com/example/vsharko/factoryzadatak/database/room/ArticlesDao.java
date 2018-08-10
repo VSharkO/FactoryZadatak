@@ -17,7 +17,7 @@ public interface ArticlesDao {
     void insert(Article article);
 
     @Query("SELECT * FROM articles_table ORDER BY publishedAt DESC")
-    Maybe<List<Article>> getArticles();
+    List<Article> getArticles();
 
     @Query("DELETE FROM articles_table")
     void deleteAllArticles();

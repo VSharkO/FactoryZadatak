@@ -7,14 +7,15 @@ import com.example.vsharko.factoryzadatak.database.room.ArticlesDao;
 import com.example.vsharko.factoryzadatak.model.Article;
 import com.example.vsharko.factoryzadatak.utils.DbResponseListener;
 import java.util.List;
-import java.util.Observable;
-
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleObserver;
+import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ArticlesRepositoryRoom implements ArticlesRepository {
@@ -28,15 +29,31 @@ public class ArticlesRepositoryRoom implements ArticlesRepository {
 
     @Override
     public void getArticles(final DbResponseListener listener) {
-       Disposable disposable = articlesDao.getArticles().subscribeOn(Schedulers.io())
+
+            Single.create(new SingleOnSubscribe<List<Article>>() {
+            @Override
+            public void subscribe(SingleEmitter<List<Article>> emitter){
+                List<Article> articles = articlesDao.getArticles();
+                emitter.onSuccess(articles);
+            }
+            }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Article>>() {
+                .subscribe(new SingleObserver<List<Article>>() {
                     @Override
-                    public void accept(@NonNull List<Article> articles){
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(List<Article> articles) {
                         listener.onSuccess(articles);
                     }
-                });
 
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onFailure(e);
+                    }
+                });
     }
 
     @Override
