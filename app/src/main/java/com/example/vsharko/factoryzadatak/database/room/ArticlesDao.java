@@ -8,6 +8,8 @@ import com.example.vsharko.factoryzadatak.model.Article;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
+
 @Dao
 public interface ArticlesDao {
 
@@ -15,7 +17,7 @@ public interface ArticlesDao {
     void insert(Article article);
 
     @Query("SELECT * FROM articles_table ORDER BY publishedAt DESC")
-    List<Article>getArticles();
+    Maybe<List<Article>> getArticles();
 
     @Query("DELETE FROM articles_table")
     void deleteAllArticles();

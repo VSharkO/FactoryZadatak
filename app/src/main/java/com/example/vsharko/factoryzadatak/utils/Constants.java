@@ -7,7 +7,7 @@ public class Constants {
     public static String ARTICLES = "articles";
     public final static String SOURCE = "bbc-news";
     public final static String SORT_BY = "top";
-    public final static String API_KEY = "6946d0c07a1c4555a4186bfcade76398";
+    public final static String API_KEY = "4ad4d90dff7443eb9ab93b4cea8677b9";
 
     //keys
     public final static String INTENT_PUT_EXTRA_CONSTANT = "index";
