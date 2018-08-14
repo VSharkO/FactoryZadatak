@@ -13,7 +13,6 @@ import com.example.vsharko.factoryzadatak.pager.activity.pagerDI.PagerComponent;
 import com.example.vsharko.factoryzadatak.pager.activity.pagerDI.PagerModule;
 import com.example.vsharko.factoryzadatak.pager.activity.presenter.ArticlePagerPresenter;
 import com.example.vsharko.factoryzadatak.utils.Constants;
-import com.example.vsharko.factoryzadatak.utils.DbResponseListener;
 
 import java.util.List;
 

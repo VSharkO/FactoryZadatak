@@ -7,11 +7,11 @@ import com.example.vsharko.factoryzadatak.utils.DbResponseListener;
 import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
-import io.reactivex.MaybeObserver;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class ArticlesRepositoryRoom implements ArticlesRepository {
 
@@ -27,7 +27,7 @@ public class ArticlesRepositoryRoom implements ArticlesRepository {
 
         articlesDao.getArticles().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MaybeObserver<List<Article>>() {
+                .subscribe(new SingleObserver<List<Article>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -36,30 +36,30 @@ public class ArticlesRepositoryRoom implements ArticlesRepository {
                     @Override
                     public void onSuccess(List<Article> articles) {
                         listener.onSuccess(articles);
+                        Timber.i("done update from db");
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         listener.onFailure(e);
                     }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
                 });
-
 
     }
 
     @Override
     public void setListOfArticles(final List<Article> listOfArticles) {
-        Completable.fromAction(new Action() {
+        Runnable runnable = new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 articlesDao.deleteAllArticles();
+                for (Article article: listOfArticles) {
+                                    articlesDao.insert(article);
+                                }
             }
-        }).subscribeOn(Schedulers.io())
+        };
+
+        Completable.fromRunnable(runnable).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
                     @Override
@@ -69,24 +69,13 @@ public class ArticlesRepositoryRoom implements ArticlesRepository {
 
                     @Override
                     public void onComplete() {
-                        Completable.fromAction(new Action() {
-                            @Override
-                            public void run(){
-                                for (Article article: listOfArticles) {
-                                    articlesDao.insert(article);
-                                }
-                            }
-
-                        }).subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe();
+                        Timber.i("done!");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Timber.e(e);
                     }
                 });
-
     }
 }

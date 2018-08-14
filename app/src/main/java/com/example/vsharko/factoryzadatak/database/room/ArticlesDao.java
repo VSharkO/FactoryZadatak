@@ -5,7 +5,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import com.example.vsharko.factoryzadatak.model.Article;
 import java.util.List;
-import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 @Dao
 public interface ArticlesDao {
@@ -14,7 +14,7 @@ public interface ArticlesDao {
     void insert(Article article);
 
     @Query("SELECT * FROM articles_table ORDER BY publishedAt DESC")
-    Maybe<List<Article>> getArticles();
+    Single<List<Article>> getArticles();
 
     @Query("DELETE FROM articles_table")
     void deleteAllArticles();
